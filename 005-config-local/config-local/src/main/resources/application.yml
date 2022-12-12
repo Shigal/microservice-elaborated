@@ -1,0 +1,8 @@
+server:
+  port: 8191
+
+# tell it to load config files from local classpath or filesystem
+# below code says configs are stored locally
+spring:
+  profiles:
+    active: native

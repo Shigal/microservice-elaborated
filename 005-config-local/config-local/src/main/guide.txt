@@ -1,0 +1,47 @@
+endpoints:
+localhost:8191/service1/default
+localhost:8191/service2/default
+localhost:8191/service2/dev
+localhost:8191/service2/prod
+
+- whatever in config folder is config store
+
+- If we have 10 services we need to maintain the configurations, so externalize the config
+    and connect all services to the config
+- In microservices, each service is individually scalable and deployable
+- If we have more demand for a service we need to replicate it
+- Create cluster of docker to create multiple instances of some instance and see how discovery tool works
+- We ned distributed tracing to find where it goes wrong in a service
+
+
+- Two ways to externalize the config
+  1. to local file system
+  2. to GitHub(hosted configuraton with GitHub)
+
+- Why we need separate config server
+    : we don't want to clutter our code base with some db url and some domain related data
+    : when we run number of instances of services in cluster, we should make sure
+        that each instance gets the same config
+    : we may need to change the configuration on the fly, when the services are running
+
+
+- When a service is struggling we can add the log-level in debug/info-level to see what's wrong
+    : we can do that without restarting the service using externalized config
+
+
+- To get the most out of microservice we should run each service on a host
+    but we can't have multiple servers, but can create docker from each service
+    same docker can be deployed in qa, prod and dev environment
+
+    : we can use same docker, but db and username, password may differ to different environment
+    : for that we have our service docker, this docker points to the config server based on the
+        profile [dev, prod, qa] we are running, and it will pull the relevant config
+
+
+1. Maintain the configuration locally
+    : config server keeps the configs in local file system
+    : but we may not know who changes what, the previous config
+2. Config server is running, but it'll pull the configs from GitHub or other repos
+    : can keep track of changes with commit log from GitHub
+
+
