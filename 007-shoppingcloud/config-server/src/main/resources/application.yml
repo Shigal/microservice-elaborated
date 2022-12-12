@@ -1,0 +1,17 @@
+server:
+  port: 8191
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Shigal/microservice-config-store
+          default-label: main
+          search-paths:
+            - 'service-config/*service'
+
+# In git repo we have service-config/customer-service/customer-prod.yml
+# Always default profile is set, but here we want to change that profile to prod
+# To alter that in IDE
+#         edit configuration -> modify options -> add VM environment
+#         -DSpring.profiles.active = prod
